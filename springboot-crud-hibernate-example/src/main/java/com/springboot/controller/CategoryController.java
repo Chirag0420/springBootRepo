@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.model.Category;
-import com.springboot.model.Product;
 import com.springboot.service.CategoryService;
-import com.springboot.service.ProductService;
 
 @RestController
 public class CategoryController 
@@ -27,12 +25,10 @@ public class CategoryController
 	private CategoryService categoryService;
 	
 	@GetMapping("api/categories")
-	public ResponseEntity<List<Category>> getAllCategory(@RequestParam String page ){
+	public ResponseEntity<List<Category>> getAllCategory(@RequestParam int page ){
 		System.out.println("page"+page);
-		//if(page=="2")
-		return ResponseEntity.ok().body(categoryService.getAllCategory());
-		//else
-		//return ResponseEntity.badRequest().body(null);
+		return ResponseEntity.ok().body(categoryService.getAllCategory(0,page));
+		
 	}
 	
 	@GetMapping("api/categories/{id}")

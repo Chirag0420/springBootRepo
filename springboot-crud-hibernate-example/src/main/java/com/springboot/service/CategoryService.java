@@ -10,7 +10,7 @@ public interface CategoryService
 
 	Category updateCategory(Category category);
 
-	List<Category> getAllCategory();
+	List<Category> getAllCategory(int pageNo,int pageSize);
 
 	void deleteCategory(long cId);
 
