@@ -10,12 +10,11 @@ public interface ProductService
 
 	Product updateProduct(Product product);
 
-	List<Product> getAllProduct();
+	List<Product> getAllProduct(int pageNo,int pageSize);
 
 	Product getProductById(long productId);
 
 	void deleteProduct(long id);
 	
 
-	List<Product> getProductsByCategoryId(Iterable<Long> catId);
 }

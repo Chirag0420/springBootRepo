@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +41,9 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Category> getAllCategory() {
-		return categoryRepository.findAll();
+	public List<Category> getAllCategory(int pageNo,int pageSize) {
+		Pageable paging=PageRequest.of(pageNo, pageSize) ;
+		return categoryRepository.findAll(paging).toList();
 	}
 
 	@Override

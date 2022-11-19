@@ -29,12 +29,10 @@ public class ProductController {
 	private CategoryService categoryService;
 	
 	@GetMapping("api/products")
-	public ResponseEntity<List<Product>> getAllProduct(@RequestParam String page ){
+	public ResponseEntity<List<Product>> getAllProduct(@RequestParam int page ){
 		System.out.println("page>>"+page);
-		//if(page=="2")
-		return ResponseEntity.ok().body(productService.getAllProduct());
-		//else
-		//return ResponseEntity.badRequest().body(null);
+		return ResponseEntity.ok().body(productService.getAllProduct(0,page));
+		
 	}
 	
 	@GetMapping("api/products/{id}")

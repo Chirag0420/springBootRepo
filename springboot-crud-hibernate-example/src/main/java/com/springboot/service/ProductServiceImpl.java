@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.exception.ResourceNotFoundException;
 import com.springboot.model.Product;
-import com.springboot.repository.CategoryRepository;
 import com.springboot.repository.ProductRepository;
 
 @Service
@@ -44,8 +45,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> getAllProduct() {
-		return this.productRepository.findAll();
+	public List<Product> getAllProduct(int pageNo,int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		return this.productRepository.findAll(paging).toList();
 	}
 
 	@Override
@@ -72,14 +74,6 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
-	public List<Product> getProductsByCategoryId(Iterable<Long> catId) {
-		List<Product> prodList = this.productRepository.findAllById(catId);
-		if(!prodList.isEmpty()) {
-			return prodList;
-		}else {
-			throw new ResourceNotFoundException("Record not found with id : " + catId);
-		}
-	}
 
 }
 
